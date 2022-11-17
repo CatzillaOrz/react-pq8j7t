@@ -36,13 +36,13 @@ const render = () => {
       <h2>{app.options.length}</h2>
       <button onClick={onRemoveAll}>remove all</button>
       <ol>
-        {app.options.map((e) => {
-          return <li key={e}>{e}</li>;
-        })}
+        {app.options.map((e) => (
+          <li key={e}>{e}</li>
+        ))}
       </ol>
       <form onSubmit={onFormSubmit}>
         <input name="option" type="text" />
-        <button >submit</button>
+        <button>submit</button>
       </form>
     </div>
   );
