@@ -1,13 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
 // import App from './App';
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 
 const app = {
-  title: 'Indecision App',
-  subtitle: 'Put your life in the hands of a computer',
+  title: "Indecision App",
+  subtitle: "Put your life in the hands of a computer",
   options: [],
 };
 
@@ -18,7 +15,7 @@ const onFormSubmit = (e) => {
 
   if (option) {
     app.options.push(option);
-    e.target.elements.option.value = '';
+    e.target.elements.option.value = "";
     render();
   }
 };
@@ -28,6 +25,12 @@ const onRemoveAll = () => {
   render();
 };
 
+const onMakeDescision = () => {
+  const randomNum = Math.floor(Math.random() * app.options.length);
+  const option = app.options[randomNum];
+  console.log(option);
+};
+
 const render = () => {
   const template = (
     <div>
@@ -35,6 +38,9 @@ const render = () => {
       <p>{app.subtitle}</p>
       <h2>{app.options.length}</h2>
       <button onClick={onRemoveAll}>remove all</button>
+      <button disabled={app.options.length === 0} onClick={onMakeDescision}>
+        Make a desicion
+      </button>
       <ol>
         {app.options.map((e) => (
           <li key={e}>{e}</li>
