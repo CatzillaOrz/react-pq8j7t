@@ -1,16 +1,15 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
 export default function App() {
-  const Greeting = {
-    hello: 'Hello StackBlitz!',
-    desrc: 'Start editing to see some magic happen :)',
-    enable: true
-  }
+  
   return (
     <div>
-      <h1>{Greeting.hello}</h1>
-      {Greeting.enable && <p>{Greeting.desrc}</p>}
+      <h1>{App.hello}</h1>
+      {App.enable && <p>{App.desrc}</p>}
+      <h2>{App.counter}</h2>
+      <button onClick={App.addOne}>+</button>
+      <button onClick={App.minusOne}>-</button>
     </div>
   );
 }
