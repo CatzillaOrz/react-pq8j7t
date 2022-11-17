@@ -5,31 +5,48 @@ import ReactDOM from 'react-dom';
 
 const rootElement = document.getElementById('root');
 
-let counter = 0;
-const addOne = () => {
-  counter++;
-  renderCounterApp();
-};
-const minusOne = () => {
-  counter--;
-  renderCounterApp();
+const app = {
+  title: 'Indecision App',
+  subtitle: 'Put your life in the hands of a computer',
+  options: [],
 };
 
-const reset = () => {
-  counter = 0;
-  renderCounterApp();
+const onFormSubmit = (e) => {
+  e.preventDefault();
+
+  const option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    render();
+  }
 };
 
-const renderCounterApp = () => {
+const onRemoveAll = () => {
+  app.options = [];
+  render();
+};
+
+const render = () => {
   const template = (
     <div>
-      <h2>{counter}</h2>
-      <button onClick={addOne}>+</button>
-      <button onClick={minusOne}>-</button>
-      <button onClick={reset}>reset</button>
+      <h1>{app.title}</h1>
+      <p>{app.subtitle}</p>
+      <h2>{app.options.length}</h2>
+      <button onClick={onRemoveAll}>remove all</button>
+      <ol>
+        {app.options.map((e) => {
+          return <li key={e}>{e}</li>;
+        })}
+      </ol>
+      <form onSubmit={onFormSubmit}>
+        <input name="option" type="text" />
+        <button >submit</button>
+      </form>
     </div>
   );
   ReactDOM.render(template, rootElement);
 };
 
-renderCounterApp();
+render();
