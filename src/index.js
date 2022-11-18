@@ -1,58 +1,20 @@
-// import App from './App';
+//ES6
 
-const rootElement = document.getElementById("root");
-
-const app = {
-  title: "Indecision App",
-  subtitle: "Put your life in the hands of a computer",
-  options: [],
-};
-
-const onFormSubmit = (e) => {
-  e.preventDefault();
-
-  const option = e.target.elements.option.value;
-
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = "";
-    render();
+class Person {
+  constructor(name = "Anonymous", age = 0) {
+    this.name = name;
+    this.age = age;
   }
-};
 
-const onRemoveAll = () => {
-  app.options = [];
-  render();
-};
+  getGretting() {
+    return `Hi! I am ${this.name}`;
+  }
 
-const onMakeDescision = () => {
-  const randomNum = Math.floor(Math.random() * app.options.length);
-  const option = app.options[randomNum];
-  console.log(option);
-};
+  getDescription() {
+    return `${this.name} is ${this.age} year(s) old.`;
+  }
+}
 
-const render = () => {
-  const template = (
-    <div>
-      <h1>{app.title}</h1>
-      <p>{app.subtitle}</p>
-      <h2>{app.options.length}</h2>
-      <button onClick={onRemoveAll}>remove all</button>
-      <button disabled={app.options.length === 0} onClick={onMakeDescision}>
-        Make a desicion
-      </button>
-      <ol>
-        {app.options.map((e) => (
-          <li key={e}>{e}</li>
-        ))}
-      </ol>
-      <form onSubmit={onFormSubmit}>
-        <input name="option" type="text" />
-        <button>submit</button>
-      </form>
-    </div>
-  );
-  ReactDOM.render(template, rootElement);
-};
-
-render();
+const me = new Person("Andrew Smith");
+console.log(me.getGretting());
+console.log(me.getGretting());

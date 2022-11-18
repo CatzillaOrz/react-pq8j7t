@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "react": "15",
     "react-dom": "15"
@@ -11,7 +12,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "babel": "babel src/index.js --out-file=public/script/app.js --presets=env,react --watch",
+    "live-server": "live-server public"
   },
   "devDependencies": {
     "react-scripts": "latest"
