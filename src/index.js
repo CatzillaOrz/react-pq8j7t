@@ -2,11 +2,26 @@ class IndecisionApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options: [1, 2, 3, 4],
+      options: [],
     };
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
   }
 
+  handleAddOption(option) {
+    this.setState((prevState) => {
+      return {
+        options: prevState.options.concat(option),
+      };
+    });
+  }
+
+  handlePick() {
+    const randomNum = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNum];
+    console.log(option);
+  }
   handleDeleteOptions() {
     this.setState(() => {
       return {
@@ -21,12 +36,15 @@ class IndecisionApp extends React.Component {
     return (
       <div>
         <Header title={title} subtitle={subtitle} />
-        <Action hasOptions={this.state.options.length > 0} />
+        <Action
+          handlePick={this.handlePick}
+          hasOptions={this.state.options.length > 0}
+        />
         <Options
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
         />
-        <AddOption />
+        <AddOption handleAddOption={this.handleAddOption} />
       </div>
     );
   }
@@ -44,13 +62,13 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
-  handlePick() {
-    console.log(200);
-  }
   render() {
     return (
       <div>
-        <button disabled={!this.props.hasOptions} onClick={this.handlePick}>
+        <button
+          disabled={!this.props.hasOptions}
+          onClick={this.props.handlePick}
+        >
           what should I do ?
         </button>
       </div>
@@ -78,11 +96,16 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddOption = this.handleAddOption.bind(this);
+  }
+
   handleAddOption(e) {
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
     if (option) {
-      console.log(option);
+      this.props.handleAddOption(option);
     }
   }
   render() {
