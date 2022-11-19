@@ -10,6 +10,11 @@ class IndecisionApp extends React.Component {
   }
 
   handleAddOption(option) {
+    if (!option) {
+      return "Can not be empty";
+    } else if (this.state.options.indexOf(option) > -1) {
+      return "Already has the same value";
+    }
     this.setState((prevState) => {
       return {
         options: prevState.options.concat(option),
@@ -99,14 +104,20 @@ class AddOption extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.state = {
+      error: undefined,
+    };
   }
 
   handleAddOption(e) {
     e.preventDefault();
     const option = e.target.elements.option.value.trim();
-    if (option) {
-      this.props.handleAddOption(option);
-    }
+    const error = this.props.handleAddOption(option);
+    this.setState(() => {
+      return {
+        error,
+      };
+    });
   }
   render() {
     return (
@@ -115,6 +126,7 @@ class AddOption extends React.Component {
           <input type="text" name="option" />
           <button>Add Option</button>
         </form>
+        {this.state.error && <p>{this.state.error}</p>}
       </div>
     );
   }
