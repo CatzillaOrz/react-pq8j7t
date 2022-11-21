@@ -13,17 +13,20 @@
     "eject": "react-scripts eject",
     "build-babel": "babel src/index.js --out-file=public/script/app.js --presets=env,react --watch",
     "build": "webpack --watch",
-    "server": "live-server public"
+    "server": "live-server public",
+    "dev-server": "webpack-dev-server"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "live-server": "^1.2.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "latest",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0"
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }
