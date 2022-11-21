@@ -1,22 +1,29 @@
 {
-  "name": "react",
+  "name": "react-pq8j7t",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
     "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "react": "15",
-    "react-dom": "15"
+    "babel-preset-react": "^6.24.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-react": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "babel": "babel src/index.js --out-file=public/script/app.js --presets=env,react --watch",
-    "live-server": "live-server public"
+    "build-babel": "babel src/index.js --out-file=public/script/app.js --presets=env,react --watch",
+    "build": "webpack",
+    "server": "live-server public"
   },
   "devDependencies": {
-    "react-scripts": "latest"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "live-server": "^1.2.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-scripts": "latest",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
   }
 }
