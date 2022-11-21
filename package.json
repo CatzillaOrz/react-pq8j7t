@@ -12,7 +12,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-babel": "babel src/index.js --out-file=public/script/app.js --presets=env,react --watch",
-    "build": "webpack",
+    "build": "webpack --watch",
     "server": "live-server public"
   },
   "devDependencies": {
