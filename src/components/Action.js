@@ -2,7 +2,11 @@ import React from "react";
 
 const Action = (props) => (
   <div>
-    <button disabled={!props.hasOptions} onClick={props.handlePick}>
+    <button
+      className="big-button"
+      disabled={!props.hasOptions}
+      onClick={props.handlePick}
+    >
       what should I do ?
     </button>
   </div>
