@@ -12,18 +12,27 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-babel": "babel src/index.js --out-file=public/script/app.js --presets=env,react --watch",
-    "build": "webpack",
-    "server": "live-server public"
+    "build": "webpack --watch",
+    "server": "live-server public",
+    "dev-server": "webpack-dev-server"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "css-loader": "^6.7.2",
     "live-server": "^1.2.2",
+    "node-sass": "^8.0.0",
+    "normalize.css": "^8.0.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-modal": "^3.16.1",
     "react-scripts": "latest",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
     "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0"
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
   }
 }
