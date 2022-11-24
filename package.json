@@ -21,6 +21,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "css-loader": "^6.7.2",
     "live-server": "^1.2.2",
     "node-sass": "^8.0.0",
@@ -30,8 +31,10 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "latest",
+    "redux": "^3.7.2",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
+    "uuid": "^3.4.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^4.11.1"
