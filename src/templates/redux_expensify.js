@@ -119,17 +119,25 @@ const filterReducer = (state = filterReducerDefautState, action) => {
 
 // get visible expense
 const getVisibleExpenses = (expenses, { text, sortBy, startDate, endDate }) => {
-  return expenses.filter((expense) => {
-    const startDateMatch =
-      typeof startDate !== "number" || expense.createdAt > startDate;
-    const endDateDateMatch =
-      typeof endDate !== "number" || expense.createdAt <= endDate;
-    const textMatch = expense.description
-      .toLowerCase()
-      .includes(text.toLowerCase());
+  return expenses
+    .filter((expense) => {
+      const startDateMatch =
+        typeof startDate !== "number" || expense.createdAt > startDate;
+      const endDateDateMatch =
+        typeof endDate !== "number" || expense.createdAt <= endDate;
+      const textMatch = expense.description
+        .toLowerCase()
+        .includes(text.toLowerCase());
 
-    return startDateMatch && endDateDateMatch && textMatch;
-  });
+      return startDateMatch && endDateDateMatch && textMatch;
+    })
+    .sort((a, b) => {
+      if (sortBy === "date") {
+        return a.createdAt < b.createdAt ? 1 : -1;
+      } else if (sortBy === "amount") {
+        return a.amount < b.amount ? 1 : -1;
+      }
+    });
 };
 // store creation
 
@@ -145,21 +153,21 @@ const dispatch = () => {
     addExpense({ description: "Rent", amount: 100, createdAt: 1000 })
   );
   const expenseTwo = store.dispatch(
-    addExpense({ description: "Cofee", amount: 300, createdAt: -200 })
+    addExpense({ description: "Coffee", amount: 300, createdAt: -200 })
   );
 
   /**
    *  
   store.dispatch(removeExpense({ id: expenseOne.expense.id }));
   store.dispatch(editExpense(expenseTwo.expense.id, { amount: 1000 }));
-  store.dispatch(sortByDate());
-  store.dispatch(sortByAmount());
 
   store.dispatch(setStartDate(-400));
   store.dispatch(setEndDate(10000));
-   */
+  store.dispatch(setTextFilter("coffee"));
 
-  store.dispatch(setTextFilter("cofee"));
+  store.dispatch(sortByDate());
+  store.dispatch(sortByAmount());
+   */
 };
 
 const run = () => {
