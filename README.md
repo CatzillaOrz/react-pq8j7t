@@ -36,3 +36,12 @@ npm config set https-proxy http://127.0.0.1:8889
 yarn config set proxy http://127.0.0.1:8889
 yarn config set https-proxy http://127.0.0.1:8889
 ```
+
+## npm -D
+
+```bash
+# use date 3rd party lib
+npm i -D moment react-date@12 react-addons-shallow-compare@15
+# react-date maybe rely on addons...
+
+```
