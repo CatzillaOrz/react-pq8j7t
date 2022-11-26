@@ -89,3 +89,16 @@ If you would prefer to ignore this check, add SKIP_PREFLIGHT_CHECK=true to an .e
 3. Try running npm ls babel-jest in your project folder. This will tell you which other package (apart from the expected react-scripts) installed babel-jest.
 
 - If nothing else helps, add SKIP_PREFLIGHT_CHECK=true to an .env file in your project. That would permanently disable this preflight check in case you want to proceed anyway.
+
+## enzyme install | dependencies
+
+- `react-test-render` is depercated because it can't do search the rendered output for a specific element and grab it's text, so it's going to be using enzyme library released by Airbnb which is a randerer for react but more featured renderer test.
+- `enzyme@3` adapter is for `react@16` lower version such as `react@15` may try to use `enzyme@2`, haven't use react lower version so don't be sure about this...(or you can check https://airbnb.io/enzyme to check the update)
+- polyfill for a browser feature know as request animation frame `RAF` short for request animation frame. `ram@3.3.2`
+- `setupTests.js` is for set up `enzyme`. Folder link: `./test/setupTests.js`
+- setup jest config(https://facebook.github.io/jest => Docs => Configuring Jest)
+- setup `package.josn` to specify the argument config `"test": "jest --config=jest.config.json`
+
+```bash
+npm i -D enzyme@3.0.0 enzyme-adapter-react-16@1.0.0 raf@3.3.2
+```
