@@ -9,7 +9,6 @@ export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     const expense = props.expense;
-    console.log(expense);
     this.state = {
       description: expense ? expense.description : "",
       createdAt: expense ? moment(expense.createdAt) : moment(),
