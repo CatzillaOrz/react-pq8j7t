@@ -1,0 +1,29 @@
+@ ./src/app.js 31:0-46
+
+ERROR in ./src/styles/styles.scss
+Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):
+HookWebpackError: document is not defined
+    at tryRunOrWebpackError (/Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/HookWebpackError.js:88:9)
+    at __webpack_require_module__ (/Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/Compilation.js:5058:12)
+    at __webpack_require__ (/Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/Compilation.js:5015:18)
+    at /Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/Compilation.js:5086:20
+    at symbolIterator (/Users/catzilla/git/react-pq8j7t/node_modules/neo-async/async.js:3485:9)
+    at done (/Users/catzilla/git/react-pq8j7t/node_modules/neo-async/async.js:3527:9)
+    at Hook.eval [as callAsync] (eval at create (/Users/catzilla/git/react-pq8j7t/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:15:1)
+    at /Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/Compilation.js:4993:43
+    at symbolIterator (/Users/catzilla/git/react-pq8j7t/node_modules/neo-async/async.js:3482:9)
+    at timesSync (/Users/catzilla/git/react-pq8j7t/node_modules/neo-async/async.js:2297:7)
+-- inner error --
+ReferenceError: document is not defined
+    at Object.insertStyleElement (/Users/catzilla/git/react-pq8j7t/node_modules/style-loader/dist/runtime/insertStyleElement.js:5:17)
+    at Object.domAPI (/Users/catzilla/git/react-pq8j7t/node_modules/style-loader/dist/runtime/styleDomAPI.js:59:30)
+    at addElementStyle (/Users/catzilla/git/react-pq8j7t/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js:57:21)
+    at modulesToDom (/Users/catzilla/git/react-pq8j7t/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js:41:21)
+    at module.exports (/Users/catzilla/git/react-pq8j7t/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js:78:25)
+    at Module.<anonymous> (/Users/catzilla/git/react-pq8j7t/node_modules/style-loader/dist/cjs.js!/Users/catzilla/git/react-pq8j7t/node_modules/css-loader/dist/cjs.js!/Users/catzilla/git/react-pq8j7t/node_modules/sass-loader/dist/cjs.js!/Users/catzilla/git/react-pq8j7t/src/styles/styles.scss:42:120)
+    at /Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/javascript/JavascriptModulesPlugin.js:441:11
+    at Hook.eval [as call] (eval at create (/Users/catzilla/git/react-pq8j7t/node_modules/tapable/lib/HookCodeFactory.js:19:10), <anonymous>:7:1)
+    at /Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/Compilation.js:5060:39
+    at tryRunOrWebpackError (/Users/catzilla/git/react-pq8j7t/node_modules/webpack/lib/HookWebpackError.js:83:7)
+
+
