@@ -38,3 +38,8 @@ module.exports = ()=>{
     }
 
 ```
+
+## webpack style extract
+
+- 替换 extract-text-webpack-plugin | use -> mini-css-extract-plugin
+- 干掉 style-loader，它会和 mini-css-extract-plugin 冲突，打包成功！
