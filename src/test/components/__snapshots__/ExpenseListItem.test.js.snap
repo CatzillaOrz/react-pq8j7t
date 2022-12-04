@@ -2,7 +2,6 @@
 
 exports[`should render ExpenseListItem correctly 1`] = `
 ShallowWrapper {
-  "length": 1,
   Symbol(enzyme.__root__): [Circular],
   Symbol(enzyme.__unrendered__): <ExpenseListItem
     amount={194}
@@ -13,8 +12,10 @@ ShallowWrapper {
   />,
   Symbol(enzyme.__renderer__): Object {
     "batchedUpdates": [Function],
+    "checkPropTypes": [Function],
     "getNode": [Function],
     "render": [Function],
+    "simulateError": [Function],
     "simulateEvent": [Function],
     "unmount": [Function],
   },
@@ -33,9 +34,9 @@ ShallowWrapper {
           </h3>
         </Link>,
         <p>
-          194
-           - 
-          0
+          $194.00
+           -
+          1970-01-01
         </p>,
       ],
     },
@@ -72,16 +73,16 @@ ShallowWrapper {
         "nodeType": "host",
         "props": Object {
           "children": Array [
-            194,
-            " - ",
-            0,
+            "$194.00",
+            " -",
+            "1970-01-01",
           ],
         },
         "ref": null,
         "rendered": Array [
-          194,
-          " - ",
-          0,
+          "$194.00",
+          " -",
+          "1970-01-01",
         ],
         "type": "p",
       },
@@ -104,9 +105,9 @@ ShallowWrapper {
             </h3>
           </Link>,
           <p>
-            194
-             - 
-            0
+            $194.00
+             -
+            1970-01-01
           </p>,
         ],
       },
@@ -143,16 +144,16 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "children": Array [
-              194,
-              " - ",
-              0,
+              "$194.00",
+              " -",
+              "1970-01-01",
             ],
           },
           "ref": null,
           "rendered": Array [
-            194,
-            " - ",
-            0,
+            "$194.00",
+            " -",
+            "1970-01-01",
           ],
           "type": "p",
         },
@@ -164,8 +165,27 @@ ShallowWrapper {
     "adapter": ReactSixteenAdapter {
       "options": Object {
         "enableComponentDidUpdateOnSetState": true,
+        "legacyContextMode": "parent",
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getChildContext": Object {
+            "calledByRenderer": false,
+          },
+          "getDerivedStateFromError": true,
+          "getDerivedStateFromProps": Object {
+            "hasShouldComponentUpdateBug": false,
+          },
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
       },
     },
+    Symbol(enzyme.__providerValues__): undefined,
   },
+  Symbol(enzyme.__providerValues__): Map {},
 }
 `;

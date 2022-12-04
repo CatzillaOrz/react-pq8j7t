@@ -2,7 +2,9 @@
   "name": "react-pq8j7t",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "numeral": "^2.0.6"
+  },
   "scripts": {
     "build:dev": "webpack",
     "build:prod": "webpack --env production",
