@@ -7,7 +7,7 @@ ShallowWrapper {
     expenses={
       Array [
         Object {
-          "amount": 194,
+          "amount": 195,
           "createdAt": 0,
           "description": "Gum",
           "id": "1",
@@ -50,7 +50,7 @@ ShallowWrapper {
         </h1>,
         Array [
           <ExpenseListItem
-            amount={194}
+            amount={195}
             createdAt={0}
             description="Gum"
             id="1"
@@ -91,7 +91,7 @@ ShallowWrapper {
         "key": "1",
         "nodeType": "function",
         "props": Object {
-          "amount": 194,
+          "amount": 195,
           "createdAt": 0,
           "description": "Gum",
           "id": "1",
@@ -146,7 +146,7 @@ ShallowWrapper {
           </h1>,
           Array [
             <ExpenseListItem
-              amount={194}
+              amount={195}
               createdAt={0}
               description="Gum"
               id="1"
@@ -187,7 +187,7 @@ ShallowWrapper {
           "key": "1",
           "nodeType": "function",
           "props": Object {
-            "amount": 194,
+            "amount": 195,
             "createdAt": 0,
             "description": "Gum",
             "id": "1",

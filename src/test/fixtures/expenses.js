@@ -4,7 +4,7 @@ export const expenses = [
     id: "1",
     description: "Gum",
     note: "",
-    amount: 194,
+    amount: 195,
     createdAt: 0,
   },
   {
