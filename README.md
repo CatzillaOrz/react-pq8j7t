@@ -23,7 +23,7 @@ npm i -D babel-plugin-transform-class-properties@6
 # setup webpack babel plugin spread object | babelrc plugin[...]
 npm i -D npm install --save-dev babel-plugin-transform-object-rest-spread
 
-# setup extract-text-webpack-plugin@3
+# setup creating seperate CSS file
 npm i -D extract-text-webpack-plugin@3
 
 ```

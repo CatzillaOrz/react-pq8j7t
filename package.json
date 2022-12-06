@@ -2,9 +2,7 @@
   "name": "react-pq8j7t",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {
-    "numeral": "^2.0.6"
-  },
+  "dependencies": {},
   "scripts": {
     "build:dev": "webpack",
     "build:prod": "webpack --env production",
@@ -13,7 +11,8 @@
     "build": "webpack --watch",
     "server": "live-server public",
     "dev-server": "webpack-dev-server",
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
