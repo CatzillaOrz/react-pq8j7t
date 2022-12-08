@@ -1,6 +1,15 @@
 import uuid from "uuid";
 import { initializeApp } from "firebase/app";
-import { child, getDatabase, ref, set, get } from "firebase/database";
+import {
+  child,
+  getDatabase,
+  ref,
+  set,
+  get,
+  remove,
+  push,
+  update,
+} from "firebase/database";
 
 // TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
@@ -30,6 +39,7 @@ function writeUserData(userId, name, email, imageUrl) {
 
 const dbRef = ref(db);
 const userId = "3c2872c1-c9ef-40fd-a9e2-85f3c2d25f50";
+/**
 get(child(dbRef, `users/${userId}`))
   .then((snapshot) => {
     if (snapshot.exists()) {
@@ -41,3 +51,44 @@ get(child(dbRef, `users/${userId}`))
   .catch((error) => {
     console.error(error);
   });
+*/
+
+/** 
+remove(ref(db, `users/${userId}`))
+  .then((_) => {
+    console.log("Deleted...");
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+*/
+
+function writeNewPost(uid, username, picture, title, body) {
+  // A post entry.
+  const postData = {
+    author: username,
+    uid: uid,
+    body: body,
+    title: title,
+    starCount: 0,
+    authorPic: picture,
+  };
+
+  // Get a key for a new Post.
+  const newPostKey = push(child(ref(db), "posts")).key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  const updates = {};
+  updates["/posts/" + newPostKey] = postData;
+  updates["/user-posts/" + uid + "/" + newPostKey] = postData;
+
+  return update(ref(db), updates);
+}
+
+writeNewPost(
+  "3c2872c1-c9ef-40fd-a9e2-85f3c2d25f50",
+  "admin",
+  "/images/default.jpeg",
+  "HelloWordFirebase",
+  "200"
+);
