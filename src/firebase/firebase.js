@@ -85,6 +85,7 @@ function writeNewPost(uid, username, picture, title, body) {
   return update(ref(db), updates);
 }
 
+/**
 writeNewPost(
   "3c2872c1-c9ef-40fd-a9e2-85f3c2d25f50",
   "admin",
@@ -92,3 +93,16 @@ writeNewPost(
   "HelloWordFirebase",
   "200"
 );
+*/
+
+push(ref(db, "posts"), {
+  "ts-functions": {
+    metrics: {
+      views: 1200000,
+      likes: 251000,
+      shares: 1200,
+    },
+    title: "Why you should use TypeScript for writing Cloud Functions",
+    author: "Doug",
+  },
+});
