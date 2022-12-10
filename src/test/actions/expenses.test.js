@@ -1,5 +1,15 @@
-import { addExpense, editExpense, removeExpense } from "../../actions/expenses";
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import {
+  startAddExpense,
+  addExpense,
+  editExpense,
+  removeExpense,
+} from "../../actions/expenses";
 import uuid from "uuid";
+import { expenses } from "../fixtures/expenses";
+
+const createMockStore = configureStore([thunk]);
 
 test("should setup remove expense aciton object", () => {
   const action = removeExpense({ id: "123abc" });
@@ -25,23 +35,31 @@ test("should setup edit expense aciton object", () => {
 });
 
 test("should setup add expense aciton object with provided value", () => {
-  const expenseDate = {
-    description: "Rent",
-    amount: 1009500,
-    createdAt: 1000,
-    note: "This was last month rent",
-  };
-
-  const action = addExpense(expenseDate);
+  const action = addExpense(expenses[2]);
   expect(action).toEqual({
     type: "ADD_EXPENSE",
-    expense: {
-      ...expenseDate,
-      id: expect.any(String), // expect.any(String)
-    },
+    expense: expenses[2],
   });
 });
 
+// test async actions
+
+test("should add expense to database and store", (done) => {
+  const store = createMockStore({});
+  const expenseData = expenses[0];
+  expenseData.note = "test async";
+  expenseData.description = "Mock async";
+
+  return store.dispatch(startAddExpense(expenseData)).then(() => {
+    //const actions = store.getActions();
+    //console.log(actions);
+    expect(1).toBe(1);
+    done();
+  });
+});
+
+/**
+ 
 test("should setup add expense aciton object with default value", () => {
   // call without data
   const expenseData = {};
@@ -58,3 +76,4 @@ test("should setup add expense aciton object with default value", () => {
     },
   });
 });
+ */
