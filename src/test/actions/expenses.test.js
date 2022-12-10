@@ -8,6 +8,10 @@ import {
 } from "../../actions/expenses";
 import uuid from "uuid";
 import { expenses } from "../fixtures/expenses";
+import db from "../../firebase/firebase";
+
+import { getDatabase, ref, child, get, onValue } from "firebase/database";
+const dbRef = ref(getDatabase());
 
 const createMockStore = configureStore([thunk]);
 
@@ -44,17 +48,48 @@ test("should setup add expense aciton object with provided value", () => {
 
 // test async actions
 
+const getDataById = (id) => {
+  return get(child(dbRef, `expenses/${id}`));
+};
+
 test("should add expense to database and store", (done) => {
   const store = createMockStore({});
   const expenseData = expenses[0];
+  delete expenseData.id;
   expenseData.note = "test async";
   expenseData.description = "Mock async";
 
-  return store.dispatch(startAddExpense(expenseData)).then(() => {
-    //const actions = store.getActions();
-    //console.log(actions);
-    expect(1).toBe(1);
-    done();
+  store.dispatch(startAddExpense(expenseData)).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "ADD_EXPENSE",
+      expense: {
+        id: expect.any(String),
+        ...expenseData,
+      },
+    });
+    onValue(
+      ref(db, "/expenses/" + actions[0].expense.id),
+      (snapshot) => {
+        console.log(snapshot.val());
+        expect(snapshot.val()).toEqual(expenseData);
+        done();
+      },
+      {
+        onlyOnce: true,
+      }
+    );
+    /**
+    getDataById(actions[0].expense.id).then((data) => {
+      if (data.exists()) {
+        console.log(data.val());
+        expect(data.val()).toEqual(expenseData);
+        done();
+      } else {
+        console.log("No data found");
+      }
+    });
+    */
   });
 });
 
