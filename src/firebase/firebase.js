@@ -23,9 +23,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase(app);
+
+export { db as default };
+
 // Initialize Realtime Database and get a reference to the service
 //const database = getDatabase(app);
 
+/**
 function writeUserData(userId, name, email, imageUrl) {
   set(ref(db, "users/" + userId), {
     username: name,
@@ -39,7 +43,6 @@ function writeUserData(userId, name, email, imageUrl) {
 
 const dbRef = ref(db);
 const userId = "3c2872c1-c9ef-40fd-a9e2-85f3c2d25f50";
-/**
 get(child(dbRef, `users/${userId}`))
   .then((snapshot) => {
     if (snapshot.exists()) {
@@ -51,9 +54,7 @@ get(child(dbRef, `users/${userId}`))
   .catch((error) => {
     console.error(error);
   });
-*/
 
-/** 
 remove(ref(db, `users/${userId}`))
   .then((_) => {
     console.log("Deleted...");
@@ -61,7 +62,6 @@ remove(ref(db, `users/${userId}`))
   .catch((error) => {
     console.error(error);
   });
-*/
 
 function writeNewPost(uid, username, picture, title, body) {
   // A post entry.
@@ -85,7 +85,6 @@ function writeNewPost(uid, username, picture, title, body) {
   return update(ref(db), updates);
 }
 
-/**
 writeNewPost(
   "3c2872c1-c9ef-40fd-a9e2-85f3c2d25f50",
   "admin",
@@ -93,7 +92,6 @@ writeNewPost(
   "HelloWordFirebase",
   "200"
 );
-*/
 
 push(ref(db, "posts"), {
   "ts-functions": {
@@ -106,3 +104,4 @@ push(ref(db, "posts"), {
     author: "Doug",
   },
 });
+*/
