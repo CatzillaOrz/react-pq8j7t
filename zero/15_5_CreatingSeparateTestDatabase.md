@@ -32,10 +32,3 @@ const firebaseConfig = {
   databaseURL: process.env.FIREBASE_API_KEY,
 };
 ```
-
-## how to Mock test server - config store
-
-- install redux-thunk
-- import thunk from "redux-thunk";
-- const composeEnhancers = window.**REDUX_DEVTOOLS_EXTENSION_COMPOSE** || compose;
--
