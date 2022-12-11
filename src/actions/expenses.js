@@ -1,6 +1,6 @@
 import uuid from "uuid";
 import db from "../firebase/firebase";
-import { push, ref } from "firebase/database";
+import { push, ref, onValue } from "firebase/database";
 
 // ADD_EXPENSE
 export const addExpense = (expense) => ({
@@ -44,4 +44,29 @@ export const setExpenses = (expenses) => ({
   expenses,
 });
 
-export const startSetExpenses = () => {};
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    const expenses = [];
+    return new Promise((resolve, reject) => {
+      onValue(
+        ref(db, "expenses"),
+        (snapshot) => {
+          const data = snapshot.val();
+          for (let key in data) {
+            expenses.push({
+              id: key,
+              ...data[key],
+            });
+          }
+          resolve();
+        },
+        {
+          onlyOnce: true,
+        }
+      );
+    }).then(() => {
+      console.log(expenses);
+      dispatch(setExpenses(expenses));
+    });
+  };
+};
