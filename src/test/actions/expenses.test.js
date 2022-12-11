@@ -5,15 +5,25 @@ import {
   addExpense,
   editExpense,
   removeExpense,
+  setExpenses,
 } from "../../actions/expenses";
 import uuid from "uuid";
 import { expenses } from "../fixtures/expenses";
 import db from "../../firebase/firebase";
 
-import { getDatabase, ref, child, get, onValue } from "firebase/database";
+import { getDatabase, ref, set, child, get, onValue } from "firebase/database";
 const dbRef = ref(getDatabase());
-
 const createMockStore = configureStore([thunk]);
+
+beforeEach((done) => {
+  const expenseData = {};
+  expenses.forEach(({ id, description, note, amount, createdAt }) => {
+    expenseData[id] = { description, note, amount, createdAt };
+  });
+  set(ref(db, "expenses"), expenseData).then((_) => {
+    done();
+  });
+});
 
 test("should setup remove expense aciton object", () => {
   const action = removeExpense({ id: "123abc" });
@@ -71,7 +81,6 @@ test("should add expense to database and store", (done) => {
     onValue(
       ref(db, "/expenses/" + actions[0].expense.id),
       (snapshot) => {
-        console.log(snapshot.val());
         expect(snapshot.val()).toEqual(expenseData);
         done();
       },
@@ -93,22 +102,10 @@ test("should add expense to database and store", (done) => {
   });
 });
 
-/**
- 
-test("should setup add expense aciton object with default value", () => {
-  // call without data
-  const expenseData = {};
-  // Assert the value of the return
-  const action = addExpense(expenseData);
+test("should setup expenses action object with data", () => {
+  const action = setExpenses(expenses);
   expect(action).toEqual({
-    type: "ADD_EXPENSE",
-    expense: {
-      id: expect.any(String),
-      description: "",
-      note: "",
-      amount: 0,
-      createdAt: 0,
-    },
+    type: "SET_EXPENSES",
+    expenses,
   });
 });
- */
