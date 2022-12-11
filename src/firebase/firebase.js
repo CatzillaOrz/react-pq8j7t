@@ -16,7 +16,7 @@ import {
 const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
-  databaseURL: "https://expensify-5ad85-default-rtdb.firebaseio.com",
+  databaseURL: process.env.FIREBASE_API_KEY,
 };
 
 // Initialize Firebase
