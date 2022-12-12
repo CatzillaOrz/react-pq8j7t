@@ -1,6 +1,6 @@
 import uuid from "uuid";
 import db from "../firebase/firebase";
-import { push, ref, onValue, remove } from "firebase/database";
+import { push, ref, onValue, remove, update } from "firebase/database";
 
 // ADD_EXPENSE
 export const addExpense = (expense) => ({
@@ -33,6 +33,19 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 });
+
+export const startEditExpense = (id, updates) => {
+  return (dispatch) => {
+    return new Promise((resolve, reject) => {
+      const updatesis = {};
+      updatesis["/expenses/" + `${id}`] = updates;
+      update(ref(db), updatesis).then(() => {
+        dispatch(editExpense(id, updates));
+        resolve();
+      });
+    });
+  };
+};
 
 export const removeExpense = ({ id } = {}) => ({
   type: "REMOVE_EXPENSE",
