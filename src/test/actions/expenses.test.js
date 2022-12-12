@@ -6,6 +6,7 @@ import {
   addExpense,
   editExpense,
   removeExpense,
+  startRemoveExpense,
   setExpenses,
 } from "../../actions/expenses";
 import uuid from "uuid";
@@ -34,6 +35,23 @@ test("should setup remove expense aciton object", () => {
   });
 });
 
+test("should remove expense from firebase", (done) => {
+  const store = createMockStore({});
+  const id = expenses[2].id;
+  store.dispatch(startRemoveExpense({ id })).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "REMOVE_EXPENSE",
+      id,
+    });
+    onValue(ref(db, "/expenses" + `/${id}`), (snapshot) => {
+      console.log(snapshot.val());
+      expect(snapshot.val()).toBeNull();
+      done();
+    });
+  });
+});
+
 test("should setup edit expense aciton object", () => {
   const _uid = uuid();
   const action = editExpense("123abc", {
@@ -59,30 +77,27 @@ test("should setup add expense aciton object with provided value", () => {
 
 // test async actions
 
-const getDataById = (id) => {
-  return get(child(dbRef, `expenses/${id}`));
-};
-
 test("should add expense to database and store", (done) => {
   const store = createMockStore({});
   const expenseData = expenses[0];
-  delete expenseData.id;
   expenseData.note = "test async";
   expenseData.description = "Mock async";
 
   store.dispatch(startAddExpense(expenseData)).then(() => {
     const actions = store.getActions();
-    expect(actions[0]).toEqual({
+    expect(addExpense(expenseData)).toEqual({
       type: "ADD_EXPENSE",
       expense: {
-        id: expect.any(String),
         ...expenseData,
       },
     });
     onValue(
       ref(db, "/expenses/" + actions[0].expense.id),
       (snapshot) => {
-        expect(snapshot.val()).toEqual(expenseData);
+        console.log(snapshot.val());
+        expect({ id: expect.any(String), ...snapshot.val() }).toEqual({
+          ...expenseData,
+        });
         done();
       },
       {
