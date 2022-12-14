@@ -1,4 +1,4 @@
-import uuid from "uuid";
+import { GoogleAuthProvider } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import {
   child,
@@ -23,8 +23,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getDatabase(app);
+const provider = new GoogleAuthProvider();
 
-export { db as default };
+export { provider, db as default };
 
 // Initialize Realtime Database and get a reference to the service
 //const database = getDatabase(app);
