@@ -52,6 +52,8 @@ module.exports = (env) => {
         "process.env.FIREBASE_API_KEY": JSON.stringify(
           process.env.FIREBASE_API_KEY
         ),
+        "process.env.API_KEY": JSON.stringify(process.env.API_KEY),
+        "process.env.AUTH_DOMAIN": JSON.stringify(process.env.AUTH_DOMAIN),
       }),
     ],
     devtool: isProduction ? "source-map" : "inline-source-map",

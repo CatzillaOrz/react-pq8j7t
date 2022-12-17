@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import {
   child,
@@ -17,15 +17,19 @@ const firebaseConfig = {
   // ...
   // The value of `databaseURL` depends on the location of the database
   databaseURL: process.env.FIREBASE_API_KEY,
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+console.log(firebaseConfig);
 
 const db = getDatabase(app);
-const provider = new GoogleAuthProvider();
+export const googleAuthProvider = new GoogleAuthProvider();
+export const auth = getAuth(app);
 
-export { provider, db as default };
+export default db;
 
 // Initialize Realtime Database and get a reference to the service
 //const database = getDatabase(app);
