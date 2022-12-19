@@ -1,6 +1,15 @@
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth, googleAuthProvider } from "../firebase/firebase";
 
+export const login = (uid) => ({
+  type: "LOGIN",
+  uid: uid,
+});
+
+export const logout = (uid) => ({
+  type: "LOGOUT",
+});
+
 export const startLogin = () => {
   return signInWithPopup(auth, googleAuthProvider)
     .then((result) => {

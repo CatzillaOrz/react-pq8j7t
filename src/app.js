@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import AppRouter, { history } from "./routers/AppRouter";
 import { Provider } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
 import getVisibleExpenses from "./selectors/expenses";
@@ -9,8 +10,7 @@ import "normalize.css/normalize.css";
 import "./styles/styles.scss";
 import "react-dates/lib/css/_datepicker.css";
 import { auth } from "./firebase/firebase";
-
-import { onAuthStateChanged } from "firebase/auth";
+import { login, logout } from "./actions/auth";
 
 const store = configureStore();
 
@@ -40,7 +40,7 @@ onAuthStateChanged(auth, (user) => {
     // https://firebase.google.com/docs/reference/js/firebase.User
     //const uid = user.uid;
     // ...
-
+    store.dispatch(login(user.uid));
     store.dispatch(startSetExpenses()).then(() => {
       renderApp();
       if (history.location.pathname === "/") {
@@ -51,6 +51,7 @@ onAuthStateChanged(auth, (user) => {
     history.push("dashboard");
     console.log("login succee");
   } else {
+    store.dispatch(logout());
     // User is signed out
     // ...
     renderApp();
