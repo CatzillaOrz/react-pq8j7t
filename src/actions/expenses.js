@@ -9,7 +9,8 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
       description = "",
       note = "",
@@ -17,7 +18,7 @@ export const startAddExpense = (expenseData = {}) => {
       createdAt = 0,
     } = expenseData;
     const expense = { description, note, amount, createdAt };
-    return push(ref(db, "expenses"), expense).then((ref) => {
+    return push(ref(db, `users/${uid}/expenses`), expense).then((ref) => {
       dispatch(
         addExpense({
           id: ref.key,
@@ -35,10 +36,11 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, updates) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     return new Promise((resolve, reject) => {
       const updatesis = {};
-      updatesis["/expenses/" + `${id}`] = updates;
+      updatesis[`users/${uid}/expenses/` + `${id}`] = updates;
       update(ref(db), updatesis).then(() => {
         dispatch(editExpense(id, updates));
         resolve();
@@ -53,8 +55,9 @@ export const removeExpense = ({ id } = {}) => ({
 });
 
 export const startRemoveExpense = ({ id } = {}) => {
-  return (dispatch) => {
-    return remove(ref(db, "expenses/" + `${id}`)).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return remove(ref(db, `users/${uid}/expenses/` + `${id}`)).then(() => {
       dispatch(removeExpense({ id }));
     });
   };
@@ -66,11 +69,12 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const expenses = [];
+    const uid = getState().auth.uid;
     return new Promise((resolve, reject) => {
       onValue(
-        ref(db, "expenses"),
+        ref(db, `users/${uid}/expenses`),
         (snapshot) => {
           const data = snapshot.val();
           for (let key in data) {
