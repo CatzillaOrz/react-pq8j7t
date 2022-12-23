@@ -1,0 +1,21 @@
+.box-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right bottom, $purple, $blue);
+  height: 100vh;
+  width: 100vw;
+}
+
+.box-layout__box {
+  background: fade-out(white, 0.15);
+  border-radius: 3px;
+  text-align: center;
+  width: 25rem;
+  padding: $l-size $m-size;
+}
+
+.box-layout__title {
+  margin: 0 0 $m-size 0;
+  line-height: 1;
+}

@@ -16,6 +16,7 @@ import db from "../../firebase/firebase";
 
 import { getDatabase, ref, set, child, get, onValue } from "firebase/database";
 const dbRef = ref(getDatabase());
+const uid = "testuid91u382";
 const createMockStore = configureStore([thunk]);
 
 beforeEach((done) => {
@@ -23,7 +24,7 @@ beforeEach((done) => {
   expenses.forEach(({ id, description, note, amount, createdAt }) => {
     expenseData[id] = { description, note, amount, createdAt };
   });
-  set(ref(db, "expenses"), expenseData).then((_) => {
+  set(ref(db, `users/${uid}/expenses`), expenseData).then((_) => {
     done();
   });
 });
@@ -37,7 +38,7 @@ test("should setup remove expense aciton object", () => {
 });
 
 test("should remove expense from firebase", (done) => {
-  const store = createMockStore({});
+  const store = createMockStore({ auth: { uid } });
   const id = expenses[2].id;
   store.dispatch(startRemoveExpense({ id })).then(() => {
     const actions = store.getActions();
@@ -45,7 +46,7 @@ test("should remove expense from firebase", (done) => {
       type: "REMOVE_EXPENSE",
       id,
     });
-    onValue(ref(db, "/expenses" + `/${id}`), (snapshot) => {
+    onValue(ref(db, `users/${uid}/expenses` + `/${id}`), (snapshot) => {
       console.log(snapshot.val());
       expect(snapshot.val()).toBeNull();
       done();
@@ -67,7 +68,7 @@ test("should setup edit expense aciton object", () => {
 });
 
 test("should edit expense from firebase", (done) => {
-  const store = createMockStore({});
+  const store = createMockStore({ auth: { uid } });
   const id = expenses[1].id;
   const updates = { amount: 39.757 };
 
@@ -78,7 +79,7 @@ test("should edit expense from firebase", (done) => {
       id,
       updates,
     });
-    return onValue(ref(db, `/expenses/${id}`), (snapshot) => {
+    return onValue(ref(db, `users/${uid}/expenses/${id}`), (snapshot) => {
       //expect(snapshot.val().amount).toBe(updates.amount);
       done();
     });
@@ -96,7 +97,7 @@ test("should setup add expense aciton object with provided value", () => {
 // test async actions
 
 test("should add expense to database and store", (done) => {
-  const store = createMockStore({});
+  const store = createMockStore({ auth: { uid } });
   const expenseData = expenses[0];
   expenseData.note = "test async";
   expenseData.description = "Mock async";
@@ -110,7 +111,7 @@ test("should add expense to database and store", (done) => {
       },
     });
     onValue(
-      ref(db, "/expenses/" + actions[0].expense.id),
+      ref(db, `users/${uid}/expenses/` + actions[0].expense.id),
       (snapshot) => {
         console.log(snapshot.val());
         expect({ id: expect.any(String), ...snapshot.val() }).toEqual({
@@ -145,7 +146,7 @@ test("should setup expenses action object with data", () => {
 });
 
 test("should fetch the expneses from firebase", () => {
-  const store = createMockStore({});
+  const store = createMockStore({ auth: { uid } });
   store.dispatch(startSetExpenses()).then(() => {
     const actions = store.getActions();
     expect(actions[0]).toEqual({

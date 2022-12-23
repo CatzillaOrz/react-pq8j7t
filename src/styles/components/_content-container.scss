@@ -1,0 +1,17 @@
+.content-container {
+  margin: 0 auto;
+  padding: 0 $m-size;
+  max-width: 80rem;
+}
+
+.page-header__title {
+  font-weight: 300;
+  margin: 0;
+  span {
+    font-weight: 700;
+  }
+}
+
+.page-header__actions {
+  margin-top: $m-size;
+}

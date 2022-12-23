@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./styles/styles.scss";
 import AppRouter, { history } from "./routers/AppRouter";
 import { Provider } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
@@ -7,7 +8,6 @@ import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
 import getVisibleExpenses from "./selectors/expenses";
 import "normalize.css/normalize.css";
-import "./styles/styles.scss";
 import "react-dates/lib/css/_datepicker.css";
 import { auth } from "./firebase/firebase";
 import { login, logout } from "./actions/auth";

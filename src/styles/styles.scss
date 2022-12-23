@@ -1,9 +1,7 @@
-@import "./base/settings";
-@import "./base/base";
-@import "./components/_container";
+@import "./base/_settings";
+@import "./base/_base";
+@import "./components/_box-layout";
 @import "./components/_button";
 @import "./components/_header";
-@import "./components/_widget";
-@import "./components/_option";
-@import "./components/_add-option";
-@import "./components/_modal";
+@import "./components/_page-header";
+@import "./components/_content-container";
